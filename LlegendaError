@@ -1,0 +1,8 @@
+ERROR Nº 01 -> el fitxer json pot:
+                                1. No ser-hi
+                                2. Format equivocat
+     BONUS INFO: classe GestioJson ha tirat l'error
+
+ERROR Nº 02 -> no pot crearse el excel:
+    SOLUCIÓ RÀPIDA: l'informació del menu esta al dropbox, obra el programa i genera els fitxers, el bar els rebrà
+    BONUS INFO: classe Controlador ha tirat l'error

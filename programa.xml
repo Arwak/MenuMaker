@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="programa" default="all">
+  
+  
+  <property file="programa.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8_(1)" value="${jdk.home.1.8_(1)}/bin"/>
+  <path id="jdk.classpath.1.8_(1)">
+    <fileset dir="${jdk.home.1.8_(1)}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+      <include name="lib/ant-javafx.jar"/>
+      <include name="lib/dt.jar"/>
+      <include name="lib/javafx-mx.jar"/>
+      <include name="lib/jconsole.jar"/>
+      <include name="lib/packager.jar"/>
+      <include name="lib/sa-jdi.jar"/>
+      <include name="lib/tools.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8_(1)}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8_(1)}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8_(1)"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.commons-codec-1.9.classpath">
+    <pathelement location="${basedir}/libs/commons-codec-1.9.jar"/>
+    <pathelement location="${basedir}/libs/poi-3.11-beta2.jar"/>
+    <pathelement location="${basedir}/libs/poi-ooxml-3.11-beta2.jar"/>
+    <pathelement location="${basedir}/libs/poi-ooxml-schemas-3.11-beta2.jar"/>
+    <pathelement location="${basedir}/libs/stax-api-1.0.1.jar"/>
+    <pathelement location="${basedir}/libs/xmlbeans-2.6.0.jar"/>
+  </path>
+  
+  <path id="library.gson-2.3.1.classpath">
+    <pathelement location="${basedir}/libs/gson-2.3.1.jar"/>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module Programa -->
+  
+  <dirname property="module.programa.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.programa" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.programa" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.programa" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.programa" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="programa.output.dir" value="${module.programa.basedir}/out/production/Programa"/>
+  <property name="programa.testoutput.dir" value="${module.programa.basedir}/out/test/Programa"/>
+  
+  <path id="programa.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="programa.module.production.classpath">
+    <path refid="${module.jdk.classpath.programa}"/>
+    <path refid="library.commons-codec-1.9.classpath"/>
+    <path refid="library.gson-2.3.1.classpath"/>
+  </path>
+  
+  <path id="programa.runtime.production.module.classpath">
+    <pathelement location="${programa.output.dir}"/>
+    <path refid="library.commons-codec-1.9.classpath"/>
+    <path refid="library.gson-2.3.1.classpath"/>
+  </path>
+  
+  <path id="programa.module.classpath">
+    <path refid="${module.jdk.classpath.programa}"/>
+    <pathelement location="${programa.output.dir}"/>
+    <path refid="library.commons-codec-1.9.classpath"/>
+    <path refid="library.gson-2.3.1.classpath"/>
+  </path>
+  
+  <path id="programa.runtime.module.classpath">
+    <pathelement location="${programa.testoutput.dir}"/>
+    <pathelement location="${programa.output.dir}"/>
+    <path refid="library.commons-codec-1.9.classpath"/>
+    <path refid="library.gson-2.3.1.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.programa">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.programa">
+    <patternset refid="excluded.from.module.programa"/>
+  </patternset>
+  
+  <path id="programa.module.sourcepath">
+    <dirset dir="${module.programa.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.programa" depends="compile.module.programa.production,compile.module.programa.tests" description="Compile module Programa"/>
+  
+  <target name="compile.module.programa.production" depends="register.custom.compilers" description="Compile module Programa; production classes">
+    <mkdir dir="${programa.output.dir}"/>
+    <javac2 destdir="${programa.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.programa}/javac">
+      <compilerarg line="${compiler.args.programa}"/>
+      <bootclasspath refid="programa.module.bootclasspath"/>
+      <classpath refid="programa.module.production.classpath"/>
+      <src refid="programa.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.programa"/>
+    </javac2>
+    
+    <copy todir="${programa.output.dir}">
+      <fileset dir="${module.programa.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.programa.tests" depends="register.custom.compilers,compile.module.programa.production" description="compile module Programa; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.programa" description="cleanup module">
+    <delete dir="${programa.output.dir}"/>
+    <delete dir="${programa.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.programa" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.programa" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.programa:jar" value="${basedir}/out/artifacts/Programa_jar"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.Programa.jar" value="${artifacts.temp.dir}/Programa.jar"/>
+  </target>
+  
+  <target name="artifact.programa:jar" depends="init.artifacts, compile.module.programa" description="Build &#39;Programa:jar&#39; artifact">
+    <property name="artifact.temp.output.programa:jar" value="${artifacts.temp.dir}/Programa_jar"/>
+    <mkdir dir="${artifact.temp.output.programa:jar}"/>
+    <jar destfile="${temp.jar.path.Programa.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${programa.output.dir}"/>
+      <zipfileset src="${basedir}/libs/commons-codec-1.9.jar"/>
+      <zipfileset src="${basedir}/libs/poi-3.11-beta2.jar"/>
+      <zipfileset src="${basedir}/libs/poi-ooxml-3.11-beta2.jar"/>
+      <zipfileset src="${basedir}/libs/poi-ooxml-schemas-3.11-beta2.jar"/>
+      <zipfileset src="${basedir}/libs/stax-api-1.0.1.jar"/>
+      <zipfileset src="${basedir}/libs/xmlbeans-2.6.0.jar"/>
+      <zipfileset src="${basedir}/libs/gson-2.3.1.jar"/>
+      <zipfileset dir="${basedir}/res"/>
+    </jar>
+    <copy file="${temp.jar.path.Programa.jar}" tofile="${artifact.temp.output.programa:jar}/Programa.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.programa:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.programa:jar}"/>
+    <copy todir="${artifact.output.programa:jar}">
+      <fileset dir="${artifact.temp.output.programa:jar}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>
